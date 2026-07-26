@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Moments ✨</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#090b2d,#1d0f3b,#38185d);
+min-height:100vh;
+overflow-x:hidden;
+color:white;
+padding:60px 20px;
+}
+
+h1{
+text-align:center;
+font-size:48px;
+margin-bottom:15px;
+}
+
+.subtitle{
+text-align:center;
+opacity:.8;
+margin-bottom:60px;
+}
+
+.timeline{
+max-width:900px;
+margin:auto;
+position:relative;
+}
+
+.timeline::before{
+content:"";
+position:absolute;
+left:50%;
+top:0;
+bottom:0;
+width:4px;
+background:rgba(255,255,255,.2);
+transform:translateX(-50%);
+}
+
+.card{
+width:42%;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+border-radius:20px;
+padding:25px;
+margin:40px 0;
+box-shadow:0 15px 30px rgba(0,0,0,.3);
+transition:.4s;
+opacity:0;
+transform:translateY(50px);
+}
+
+.card.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.left{
+margin-right:auto;
+}
+
+.right{
+margin-left:auto;
+}
+
+.number{
+font-size:40px;
+font-weight:bold;
+color:#ff8fb1;
+margin-bottom:15px;
+}
+
+.title{
+font-size:22px;
+margin-bottom:10px;
+}
+
+.text{
+line-height:1.8;
+opacity:.9;
+}
+
+button{
+display:block;
+margin:70px auto;
+padding:16px 40px;
+border:none;
+border-radius:40px;
+background:#ff4b91;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+@media(max-width:768px){
+
+.timeline::before{
+left:20px;
+}
+
+.card{
+width:100%;
+margin-left:40px;
+}
+
+}
+
+</style>
+
+</head>
+
+<audio id="bgMusic" loop>
+    <source src="assets/music/Love Story.wav" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("bgMusic");
+
+// Restore previous position
+const savedTime = localStorage.getItem("musicTime");
+if (savedTime) {
+    music.currentTime = parseFloat(savedTime);
+}
+
+// Restore play state
+const wasPlaying = localStorage.getItem("musicPlaying");
+
+document.addEventListener("click", () => {
+    if (wasPlaying !== "false") {
+        music.play().catch(() => {});
+    }
+}, { once: true });
+
+// Save playback position every second
+setInterval(() => {
+    localStorage.setItem("musicTime", music.currentTime);
+}, 1000);
+
+// Save play/pause state
+music.addEventListener("play", () => {
+    localStorage.setItem("musicPlaying", "true");
+});
+
+music.addEventListener("pause", () => {
+    localStorage.setItem("musicPlaying", "false");
+});
+</script>
+<body>
+
+<h1>Little Things 🌸</h1>
+
+<p class="subtitle">
+Sometimes it's the smallest moments that stay with us.
+</p>
+
+<div class="timeline">
+
+<div class="card left">
+<div class="number">01</div>
+<div class="title">Our First Conversation</div>
+<div class="text">
+I didn't expect a simple conversation to become something I'd genuinely look forward to.
+</div>
+</div>
+
+<div class="card right">
+<div class="number">02</div>
+<div class="title">Your Kindness</div>
+<div class="text">
+When you asked if I was okay, it meant more than you probably realized.
+</div>
+</div>
+
+<div class="card left">
+<div class="number">03</div>
+<div class="title">Your Messages</div>
+<div class="text">
+Some notifications feel ordinary. Yours always make me smile first.
+</div>
+</div>
+
+<div class="card right">
+<div class="number">04</div>
+<div class="title">Thank You</div>
+<div class="text">
+Thank you for simply being yourself. That's more than enough.
+</div>
+</div>
+
+<div class="card left">
+<div class="number">05</div>
+<div class="title">One Wish</div>
+<div class="text">
+I hope today gives you at least one reason to smile. That's all I wanted this page to do.
+</div>
+</div>
+
+</div>
+
+<button onclick="location.href='gallery.html'">
+Continue ✨
+</button>
+
+<script>
+
+const observer=new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+});
+
+document.querySelectorAll(".card").forEach(card=>observer.observe(card));
+
+</script>
+
+</body>
+</html>

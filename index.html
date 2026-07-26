@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Universe For You ✨</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script defer src="js/app.js"></script>
+</head>
+
+<audio id="bgMusic" loop>
+    <source src="assets/music/Love Story.wav" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("bgMusic");
+
+// Restore previous position
+const savedTime = localStorage.getItem("musicTime");
+if (savedTime) {
+    music.currentTime = parseFloat(savedTime);
+}
+
+// Restore play state
+const wasPlaying = localStorage.getItem("musicPlaying");
+
+document.addEventListener("click", () => {
+    if (wasPlaying !== "false") {
+        music.play().catch(() => {});
+    }
+}, { once: true });
+
+// Save playback position every second
+setInterval(() => {
+    localStorage.setItem("musicTime", music.currentTime);
+}, 1000);
+
+// Save play/pause state
+music.addEventListener("play", () => {
+    localStorage.setItem("musicPlaying", "true");
+});
+
+music.addEventListener("pause", () => {
+    localStorage.setItem("musicPlaying", "false");
+});
+</script>
+
+<body>
+
+<canvas id="space"></canvas>
+
+<div class="overlay"></div>
+
+<div class="glass">
+
+<div class="logo">
+✨
+</div>
+
+<h1>
+Welcome...
+</h1>
+
+<p class="subtitle">
+I made a tiny universe...
+just for someone who made my days a little brighter.
+</p>
+
+<button id="start">
+Enter My Universe 🌸
+</button>
+
+<div class="scroll">
+↓
+</div>
+
+</div>
+
+<div class="stars"></div>
+
+<div class="petals"></div>
+
+</body>
+</html>

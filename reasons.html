@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reasons 🌸</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+background:linear-gradient(135deg,#0d1027,#24194b,#47246d);
+
+min-height:100vh;
+
+color:white;
+
+padding:50px;
+
+}
+
+h1{
+
+text-align:center;
+
+font-size:52px;
+
+margin-bottom:10px;
+
+}
+
+.subtitle{
+
+text-align:center;
+
+opacity:.8;
+
+margin-bottom:45px;
+
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:25px;
+
+max-width:1200px;
+
+margin:auto;
+
+}
+
+.card{
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+border-radius:22px;
+
+padding:30px;
+
+cursor:pointer;
+
+transition:.35s;
+
+box-shadow:0 15px 35px rgba(0,0,0,.3);
+
+min-height:180px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+font-size:18px;
+
+font-weight:500;
+
+}
+
+.card:hover{
+
+transform:translateY(-8px) scale(1.03);
+
+}
+
+.hidden{
+
+display:none;
+
+}
+
+button{
+
+display:block;
+
+margin:60px auto;
+
+padding:16px 40px;
+
+font-size:18px;
+
+border:none;
+
+border-radius:40px;
+
+background:#ff4b91;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+</style>
+
+</head>
+<audio id="bgMusic" loop>
+    <source src="assets/music/Love Story.wav" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("bgMusic");
+
+// Restore previous position
+const savedTime = localStorage.getItem("musicTime");
+if (savedTime) {
+    music.currentTime = parseFloat(savedTime);
+}
+
+// Restore play state
+const wasPlaying = localStorage.getItem("musicPlaying");
+
+document.addEventListener("click", () => {
+    if (wasPlaying !== "false") {
+        music.play().catch(() => {});
+    }
+}, { once: true });
+
+// Save playback position every second
+setInterval(() => {
+    localStorage.setItem("musicTime", music.currentTime);
+}, 1000);
+
+// Save play/pause state
+music.addEventListener("play", () => {
+    localStorage.setItem("musicPlaying", "true");
+});
+
+music.addEventListener("pause", () => {
+    localStorage.setItem("musicPlaying", "false");
+});
+</script>
+<body>
+
+<h1>Little Things I Appreciate ❤️</h1>
+
+<p class="subtitle">
+Click each card to reveal a message.
+</p>
+
+<div class="grid" id="grid"></div>
+
+<button onclick="location.href='final.html'">
+Final Surprise ✨
+</button>
+
+<script>
+
+const reasons=[
+
+"You always check if I'm okay.",
+
+"Our conversations brighten my day.",
+
+"You make ordinary chats feel special.",
+
+"I appreciate your kindness.",
+
+"You have a calming presence.",
+
+"I like how genuine you are.",
+
+"You make me smile without trying.",
+
+"You remembered me.",
+
+"You make conversations easy.",
+
+"Thank you for being thoughtful.",
+
+"I enjoy getting to know you.",
+
+"I hope you keep smiling.",
+
+"You made me feel noticed.",
+
+"I appreciate your time.",
+
+"Your messages are always welcome."
+
+];
+
+const grid=document.getElementById("grid");
+
+reasons.forEach((text,index)=>{
+
+const card=document.createElement("div");
+
+card.className="card";
+
+card.innerHTML=`<strong>❤️ Card ${index+1}</strong>`;
+
+card.onclick=()=>{
+
+card.innerHTML=text;
+
+};
+
+grid.appendChild(card);
+
+});
+
+</script>
+
+</body>
+</html>
