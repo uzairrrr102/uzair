@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://laiba-uzair.netlify.app/sitemap.xml
